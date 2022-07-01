@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from fbs_runtime.application_context.PyQt5 import ApplicationContext
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QProgressBar, QGroupBox, \
@@ -445,12 +446,7 @@ class MainWindow(QWidget):
             return None
 
         try:
-            dev = hid.device()
-            if cli_mode:
-                print(self.cli_dev)
-                dev.open_path(self.cli_dev)
-            else:
-                dev.open_path(self.devices[idx]["path"])
+            dev = hid.Device(0x0c45,0x7040)
             return dev
         except OSError:
             self._on_error(
